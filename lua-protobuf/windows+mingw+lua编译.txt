@@ -1,0 +1,39 @@
+windows+mingw+lua编译
+
+在Windows下使用mingw去编译lua的源码
+下载安装mingw和lua的源码（我使用的版本是5.3.5）这是不用说的了。
+右键解压到当前文件夹，得到SRC的目录的详细路径为E:/lua-5.3.5/src
+然后打开运行，输入CMD，进入E:/lua-5.3.5目录，并运行命令
+make mingw（表示使用mingw平台来编译该源码）.
+其时这样就已经编译完成了，lua.exe luac.exe lua53.dll liblua.a
+下面就可以在自己的C程序中去编写代码了，简单的例子如下：
+
+#include <stdio.h> 
+#include <lua.h> 
+#include <lauxlib.h> 
+#include <lualib.h> 
+
+int main(int argc, char *argv[])
+{ 
+    char line[BUFSIZ];
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+    //while (fgets(line, sizeof(line), stdin) != 0) printf("%s\n",line);
+    luaL_dofile(L, "test.lua");
+    lua_close(L);
+    
+    return 0; 
+}
+
+test.lua
+print("-----------------------------");
+print("Hello world"); 
+print("-----------------------------");
+
+这里代码我就不给出解释了。
+然后用GCC去编译这段.C代码，我们再来写个MAKEFILE文件
+文件内容如下：
+all: 
+gcc -o t.exe .\t.c -IE:\wireshark_lua_build\lua-5.3.5\src E:\wireshark_lua_build\lua-5.3.5\src\liblua.a
+
+-I后面表示非常用搜索路径中的源文件地址
