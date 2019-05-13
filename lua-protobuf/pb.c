@@ -1783,4 +1783,7 @@ PB_NS_END
 
 /* cc: flags+='-O3 -ggdb -pedantic -std=c90 -Wall -Wextra --coverage'
  * maccc: flags+='-v -shared -undefined dynamic_lookup' output='pb.so'
- * win32cc: flags+='-s -mdll -DLUA_BUILD_AS_DLL ' output='pb.dll' libs+='-llua53' */
+ * win32cc: flags+='-s -mdll -DLUA_BUILD_AS_DLL ' output='pb.dll' libs+='-llua53' 
+ * wingw: gcc pb.c -s -mdll -DLUA_BUILD_AS_DLL -o pb.dll -IE:\wireshark_lua_build\lua-5.3.5\src E:\wireshark_lua_build\lua-5.3.5\src\lua53.dll
+ */
+ 
